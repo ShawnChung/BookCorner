@@ -1,0 +1,398 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.shawnana</groupId>
+	<artifactId>BookCorner-parent</artifactId>
+	<version>0.0.1</version>
+	<packaging>pom</packaging>
+	<name>${project.artifactId}-${project.version}</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring.version>3.2.13.RELEASE</spring.version>
+		<mybatis.version>3.2.8</mybatis.version>
+		<mybatis-spring.version>1.2.0</mybatis-spring.version>
+		<jtds.version>1.2.7</jtds.version>
+		<dbcp.version>1.4</dbcp.version>
+		<hsqldb.version>2.3.2</hsqldb.version>
+		<slf4j.version>1.6.2</slf4j.version>
+		<log4j.version>1.2.16</log4j.version>
+		<jasypt.version>1.9.2</jasypt.version>
+		<jstl.version>1.1.2</jstl.version>
+		<standardtaglibs.version>1.1.2</standardtaglibs.version>
+		<servlet.version>2.5</servlet.version>
+		<junit.version>4.8.2</junit.version>
+		<mockito.version>1.10.19</mockito.version>
+		<activemq.version>5.4.2</activemq.version>
+
+		<!-- bc modules version start -->
+		<bc.parent.version>0.0.1</bc.parent.version>
+		<bc.web.version>0.0.1</bc.web.version>
+		<bc.app.version>0.0.1</bc.app.version>
+		<bc.infra.version>0.0.1</bc.infra.version>
+		<bc.domain.version>0.0.1</bc.domain.version>
+		<bc.service.version>0.0.1</bc.service.version>
+		<bc.serviceimpl.version>0.0.1</bc.serviceimpl.version>
+		<bc.dao.version>0.0.1</bc.dao.version>
+		<bc.daoimpl.version>0.0.1</bc.daoimpl.version>
+		<!-- bc modules version end -->
+
+		<!--sql server2008 -->
+		<db.jdbcDriver>net.sourceforge.jtds.jdbc.Driver</db.jdbcDriver>
+		<db.connectionURL><![CDATA[jdbc:jtds:sqlserver://localhost:1433/BookCorner;tds=8.0;lastupdatecount=true]]></db.connectionURL>
+		<db.username>sa</db.username>
+		<db.password>ENC(yag7yI2MGDrL49A+k1b42w==)</db.password>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- bc modules begin -->
+			<dependency>
+				<groupId>com.shawnana</groupId>
+				<artifactId>BookCorner-infra</artifactId>
+				<version>${bc.infra.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.shawnana</groupId>
+				<artifactId>BookCorner-domain</artifactId>
+				<version>${bc.domain.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.shawnana</groupId>
+				<artifactId>BookCorner-dao</artifactId>
+				<version>${bc.dao.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.shawnana</groupId>
+				<artifactId>BookCorner-daoimpl</artifactId>
+				<version>${bc.daoimpl.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.shawnana</groupId>
+				<artifactId>BookCorner-service</artifactId>
+				<version>${bc.service.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.shawnana</groupId>
+				<artifactId>BookCorner-serviceimpl</artifactId>
+				<version>${bc.serviceimpl.version}</version>
+			</dependency>
+			<!-- bc modules end -->
+
+			<!-- spring start -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jdbc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<!-- spring end -->
+
+			<!-- database start -->
+			<dependency>
+				<groupId>net.sourceforge.jtds</groupId>
+				<artifactId>jtds</artifactId>
+				<version>${jtds.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-dbcp</groupId>
+				<artifactId>commons-dbcp</artifactId>
+				<version>${dbcp.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hsqldb</groupId>
+				<artifactId>hsqldb</artifactId>
+				<version>${hsqldb.version}</version>
+			</dependency>
+			<!-- database end -->
+
+			<!-- logging start -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+			<!-- logging end -->
+
+			<!-- encsypt start -->
+			<dependency>
+				<groupId>org.jasypt</groupId>
+				<artifactId>jasypt</artifactId>
+				<version>${jasypt.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jasypt</groupId>
+				<artifactId>jasypt-spring31</artifactId>
+				<version>${jasypt.version}</version>
+			</dependency>
+			<!-- encsypt end -->
+
+			<!-- jee start -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>jstl</artifactId>
+				<version>${jstl.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>taglibs</groupId>
+				<artifactId>standard</artifactId>
+				<version>${standardtaglibs.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>${servlet.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- jee end -->
+
+			<!-- mybatis start -->
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis</artifactId>
+				<version>${mybatis.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis-spring</artifactId>
+				<version>${mybatis-spring.version}</version>
+			</dependency>
+			<!-- mybatis end -->
+
+			<!-- activemq start -->
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-core</artifactId>
+				<version>${activemq.version}</version>
+			</dependency>
+			<!-- activemq end -->
+
+			<!-- junit start -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<!-- junit end -->
+
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-all</artifactId>
+				<version>${mockito.version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<repositories>
+		<repository>
+			<id>nexus</id>
+			<name>nexus</name>
+			<url>http://localhost:8081/nexus/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>Apache Maven</id>
+			<url>http://repo1.maven.org/maven2</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>spring-maven-release</id>
+			<url>http://maven.springframework.org/release</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>spring-maven-milestone</id>
+			<url>http://maven.springframework.org/milestone</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<java.naming.provider.url></java.naming.provider.url>
+				<web-ejb-context>ejb-context-dev.xml</web-ejb-context>
+				<web-smUserKey>sm-user</web-smUserKey>
+				<web-localTestUser>ht0001</web-localTestUser>
+			</properties>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<java.naming.provider.url>jnp://10.92.3.20:1099</java.naming.provider.url>
+				<web-ejb-context>ejb-context.xml</web-ejb-context>
+				<web-smUserKey>sm-user</web-smUserKey>
+				<web-localTestUser></web-localTestUser>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<java.naming.provider.url>jnp://10.109.61.6:6000</java.naming.provider.url>
+				<web-ejb-context>ejb-context.xml</web-ejb-context>
+				<web-smUserKey>sm_user</web-smUserKey>
+				<web-localTestUser></web-localTestUser>
+			</properties>
+		</profile>
+	</profiles>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.4</version>
+					<configuration>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+					<version>2.15</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>2.4.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.3.2</version>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.5</version>
+					<configuration>
+						<argLine>-Dfile.encoding=UTF-8</argLine>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.3</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-ear-plugin</artifactId>
+					<version>2.4.1</version>
+					<configuration>
+						<defaultLibBundleDir>lib</defaultLibBundleDir>
+						<version>5</version>
+						<unpack>false</unpack>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.1</version>
+					<configuration>
+						<!-- <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors> -->
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>1.6</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>2.1</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>

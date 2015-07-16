@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shawnana.bookcorner.daoimpl.mybatis.mappers.UserMapper">
+    <resultMap type="User" id="UserResult">
+        <!-- <constructor>
+            <idArg column="id" javaType="Integer"/>
+            <arg column="Currency_Code" javaType="String"/>
+            <arg column="Currency_Name" javaType="String"/>
+            <arg column="Year" javaType="Integer"/>
+            <arg column="ExchangeRate" javaType="Double"/>
+        </constructor> -->
+        
+        <id property="id" column="id"/>
+        <result property="userno" column="user_no"/>
+        <result property="username" column="user_name"/>
+        <result property="gender" column="user_gender"/>
+        <result property="password" column="user_password"/>
+    </resultMap>
+    
+    <resultMap type="User" id="UserWithDepartmentResult" extends="UserResult">
+    	<result property="department.id" column="dep_id" />
+    	<result property="department.code" column="dep_code" />
+    	<result property="department.name" column="dep_name" />
+    </resultMap>
+    
+	<select id="findAllUsers" resultMap="UserWithDepartmentResult">
+	   SELECT 
+	   users.id AS id,
+	   users.user_no,
+	   users.user_name,
+	   users.user_gender,
+	   users.user_password,
+	   deps.id AS dep_id,
+	   deps.dep_code,
+	   deps.dep_name
+	   FROM Users users
+	   INNER JOIN Departments deps ON users.dep_id = deps.id
+	</select>
+	
+	<select id="findUserById" parameterType="int" resultMap="UserWithDepartmentResult">
+	   SELECT 
+	   users.id AS id,
+	   users.user_no,
+	   users.user_name,
+	   users.user_gender,
+	   users.user_password,
+	   deps.id AS dep_id,
+	   deps.dep_code,
+	   deps.dep_name
+	   FROM Users users
+	   INNER JOIN Departments deps ON users.dep_id = deps.id
+	   WHERE users.id=#{id}
+	</select>
+	
+	<select id="findUserByUserno" parameterType="String" resultMap="UserWithDepartmentResult">
+	   SELECT 
+	   users.id AS id,
+	   users.user_no,
+	   users.user_name,
+	   users.user_gender,
+	   users.user_password,
+	   deps.id AS dep_id,
+	   deps.dep_code,
+	   deps.dep_name
+	   FROM Users users
+	   INNER JOIN Departments deps ON users.dep_id = deps.id
+	   WHERE users.user_no = #{userno}
+	</select>
+	
+	<insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+	   INSERT INTO Users(user_no, user_name, user_gender, dep_id, user_password)
+	   VALUES(#{userno}, #{username}, #{gender}, #{department.id}, #{password})
+	</insert>
+	
+	<update id="updateUser" parameterType="User" >
+	   UPDATE Users SET user_no=#{userno}, user_name=#{username},
+	   user_gender=#{gender}, dep_id=#{department.id}, user_password=#{password} 
+	   WHERE id=#{id}
+	</update>
+	
+	<delete id="deleteUserById" parameterType="int">
+	   DELETE FROM Users WHERE id=#{id}
+	</delete>
+</mapper>

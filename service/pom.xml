@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>BookCorner-parent</artifactId>
+		<groupId>com.shawnana</groupId>
+		<version>0.0.1</version>
+		<relativePath>../parent/pom.xml</relativePath>
+	</parent>
+	<artifactId>BookCorner-service</artifactId>
+	<name>${project.artifactId}-${project.version}</name>
+	<version>${bc.service.version}</version>
+
+	<dependencies>
+		<!-- project dependency -->
+		<!-- <dependency>
+			<groupId>com.shawnana</groupId>
+			<artifactId>BookCorner-infra</artifactId>
+			<version>${bc.infra.version}</version>
+		</dependency> -->
+		<dependency>
+		  <groupId>com.shawnana</groupId>
+		  <artifactId>BookCorner-domain</artifactId>
+		</dependency>
+		<!-- project dependency end -->
+		
+   		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>

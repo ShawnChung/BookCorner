@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shawnana.bookcorner.daoimpl.mybatis.mappers.DepartmentMapper">
+    <resultMap type="Department" id="DepartmentResult">       
+        <id property="id" column="id"/>
+        <result property="code" column="dep_code"/>
+        <result property="name" column="dep_name"/>
+    </resultMap>
+    
+    <resultMap type="Department" id="DepartmentWithFatherResult" extends="DepartmentResult">
+    	<result property="fatherDepartment.id" column="father_dep_id" />
+    	<result property="fatherDepartment.code" column="father_dep_code" />
+    	<result property="fatherDepartment.name" column="father_dep_name" />
+    </resultMap>
+    
+    <resultMap type="Department" id="DepartmentWithFatherChildrenResult" extends="DepartmentWithFatherResult">
+    	<collection property="childrenDepartment" resultMap="ChildrenDepartmentResult"/>
+    </resultMap>
+    
+    <resultMap type="Department" id="ChildrenDepartmentResult">       
+        <id property="id" column="children_dep_id"/>
+        <result property="code" column="children_dep_code"/>
+        <result property="name" column="children_dep_name"/>
+    </resultMap>
+    
+	<select id="findAllDepartments" resultMap="DepartmentWithFatherResult">
+	   SELECT 
+	   deps.id AS id,
+	   deps.dep_code,
+	   deps.dep_name,
+	   father_deps.id AS father_dep_id,
+	   father_deps.dep_code AS father_dep_code,
+	   father_deps.dep_name AS father_dep_name
+	   FROM Departments deps
+	   LEFT JOIN Departments father_deps ON deps.father_dep_id = father_deps.id
+	</select>
+	
+	<select id="findDepartmentById" parameterType="int" resultMap="DepartmentWithFatherChildrenResult">
+	   SELECT 
+	   deps.id AS id,
+	   deps.dep_code,
+	   deps.dep_name,
+	   father_deps.id AS father_dep_id,
+	   father_deps.dep_code AS father_dep_code,
+	   father_deps.dep_name AS father_dep_name,
+	   children_deps.id AS children_dep_id,
+	   children_deps.dep_code AS children_dep_code,
+	   children_deps.dep_name AS father_dep_name
+	   FROM Departments deps
+	   LEFT JOIN Departments father_deps ON deps.father_dep_id = father_deps.id
+	   LEFT JOIN Departments children_deps ON deps.id = children_deps.father_dep_id
+	   WHERE deps.id=#{id}
+	</select>
+	
+	<insert id="insertDepartment" parameterType="Department" useGeneratedKeys="true" keyProperty="id">
+	   INSERT INTO Departments (dep_code, dep_name, father_dep_id)
+	   VALUES(#{code}, #{name}, #{fatherDepartment.id})
+	</insert>
+	
+	<update id="updateDepartment" parameterType="Department" >
+	   UPDATE Departments SET dep_code=#{code}, dep_name=#{name},
+	   father_dep_id=#{fatherDepartment.id}
+	   WHERE id=#{id}
+	</update>
+	
+	<!-- <select id="findUserByUserno" parameterType="String" resultMap="UserWithDepartmentResult">
+	   SELECT 
+	   users.id AS id,
+	   users.user_no,
+	   users.user_name,
+	   users.user_gender,
+	   users.user_password,
+	   deps.id AS dep_id,
+	   deps.dep_code,
+	   deps.dep_name
+	   FROM Users users
+	   INNER JOIN Departments deps ON users.dep_id = deps.id
+	   WHERE users.user_no like #{userno}
+	</select>
+	
+	
+	
+	
+	
+	<delete id="deleteUserById" parameterType="int">
+	   DELETE FROM Users WHERE id=#{id}
+	</delete> -->
+</mapper>
