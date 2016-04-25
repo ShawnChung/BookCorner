@@ -9,11 +9,11 @@ VALUES('205639', 'wangx', 'MALE', 4, '');
 
 --Departments
 INSERT INTO Departments(dep_code, dep_name, father_dep_id)
-VALUES('CSN', '中国南方航空股份有限公司', 0);
+VALUES('COM', '**有限公司', 0);
 INSERT INTO Departments(dep_code, dep_name, father_dep_id)
 VALUES('CWB', '财务部', 1);
 INSERT INTO Departments(dep_code, dep_name, father_dep_id)
-VALUES('XXZX', '信息中心', 1);
+VALUES('ITZX', 'IT中心', 1);
 INSERT INTO Departments(dep_code, dep_name, father_dep_id)
 VALUES('GLYFB', '管理研发部', 3);
 INSERT INTO Departments(dep_code, dep_name, father_dep_id)
