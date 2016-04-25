@@ -1,10 +1,10 @@
 --Users
 INSERT INTO Users(user_no, user_name, user_gender, dep_id, user_password)
-VALUES('209461', 'zhongsx', 'MALE', 4, '');
+VALUES('000001', 'zhongsx', 'MALE', 4, '');
 INSERT INTO Users(user_no, user_name, user_gender, dep_id, user_password)
-VALUES('209387', 'wengsn', 'FEMALE', 4, '');
+VALUES('000002', 'wengsn', 'FEMALE', 4, '');
 INSERT INTO Users(user_no, user_name, user_gender, dep_id, user_password)
-VALUES('205639', 'wangx', 'MALE', 4, '');
+VALUES('000003', 'wangx', 'MALE', 4, '');
 
 
 --Departments
